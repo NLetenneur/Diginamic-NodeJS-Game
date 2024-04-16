@@ -1,6 +1,6 @@
 const Game = require("../model/game.js");
 const choices = ["pierre", "papier", "ciseaux"];
-const sequelize = require("sequelize");
+const { Op } = require("sequelize");
 
 const playRock = (req, res) => {
   //Choix de l'ordinateur au hasard
@@ -89,9 +89,22 @@ const score = async (req, res) => {
   res.send(`win: ${win}, lose: ${lose}, tie: ${tie} `);
 };
 
-const restart = async () => {
-  await sequelize.destroyAll();
+const restart = async (req, res) => {
+  await Game.destroy({
+    where: {
+      result: {
+        [Op.or]: ["gagné", "perdu", "égalité"],
+      },
+    },
+  })
+    .then(() => {
+      res.send(`Résultats réinitialisés`);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 };
+
 //cheat;
 
 module.exports = {
