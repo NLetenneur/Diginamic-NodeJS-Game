@@ -105,10 +105,16 @@ const restart = async (req, res) => {
     });
 };
 
-//cheat;
+const cheat = async (req, res) => {
+  let win = req.param.win;
+  let lose = req.param.lose;
+  let tie = req.param.tie;
+  res.send(`win: ${win}, lose: ${lose}, tie: ${tie} `);
+};
 
 module.exports = {
-  /* cheat ,*/ playRock,
+  cheat,
+  playRock,
   playPaper,
   playScissors,
   restart,

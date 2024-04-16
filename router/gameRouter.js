@@ -1,5 +1,5 @@
 const {
-  //cheat,
+  cheat,
   playRock,
   playPaper,
   playScissors,
@@ -15,6 +15,6 @@ router.get(`/game/papier`, playPaper);
 router.get(`/game/ciseaux`, playScissors);
 router.get("/game/score", score);
 router.post("/game/restart", restart);
-//router.delete(`/game/cheat/${win}/${lose}/${tie}`, cheat);
+router.delete(`/game/cheat`, cheat);
 
 module.exports = router;
